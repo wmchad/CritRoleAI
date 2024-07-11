@@ -1,6 +1,6 @@
 import pandas as pd
 
-GetTranscriptDatabase(db_file):
+def GetTranscriptDatabase(db_file):
     """Gets the transcript database.
     
     Args:
@@ -24,19 +24,15 @@ GetTranscriptDatabase(db_file):
         parse_dates = ['download_date']
     )
 
-def GetEpisodeTranscript(arc_no, ep_no, transcript_file):
+def GetEpisodeTranscript(transcript_file):
     """Gets an episode transcript.
     
     Args:
-        arc_no (int):             the arc number of the episode.
-        ep_no (int):              the episode number of the episode within the arc.
         transcript_file (string): the filename for the transcript of the episode.
     
     Returns:
         A pandas DataFrame with the full transcript and some calculated columns.
         Contains the following columns:
-        - arc_no:     the arc number of the episode.
-        - episode_no: the episode number of the episode within the arc.
         - section_no: the section number of the line.
         - line_no:    the line number of the line within the section.
         - section:    the name of the section.
@@ -46,10 +42,37 @@ def GetEpisodeTranscript(arc_no, ep_no, transcript_file):
         - nwords:     the number of words in the line.
     """
     df = pd.read_csv(transcript_file)
-    df.insert(0, 'arc_no', arc_no)
-    df.insert(1, 'episode_no', ep_no)
     df.loc[:, 'linelength'] = [len(x) for x in df['line']]
     df.loc[:, 'nwords'] = [len(x.split()) for x in df['line']]
     return df
 
+def CollectTranscripts(transcript_df, data_dir, addl_columns = {}):
+    """Collects a set of transcripts.
+    
+    Args:
+        transcript_df (DataFrame): the episode transcripts to retrieve, with one row per transcript.
+            Must include the transcript_file column, along with any specified in <addl_columns>.
+        data_dir (string): the base directory for the transcript files.
+        addl_columns (dictionary): a dictionary of additional fields to add to the transcript data.
+            Keys are the column name in <transcript_df>, and values are the target column name in the transcript data.
+            All new fields are added as the first columns of the data.
+            Defaults to an empty dictionary.
+        
+    Returns:
+        A pandas DataFrame with the data from all the transcripts.
+        See [GetEpisodeTranscript] for more information.
+    """
+
+    transcripts = pd.DataFrame()
+    for index, row in transcript_df.iterrows():
+        episode_transcript = GetEpisodeTranscript(f'{data_dir}/{row["transcript_file"]}')
+        for k, v in reversed(addl_columns.items()):
+            episode_transcript.insert(0, v, row[k])
+        transcripts = pd.concat([
+            transcripts,
+            episode_transcript
+        ])
+    transcripts.reset_index(inplace = True)
+    transcripts.drop('index', axis = 1, inplace = True)
+    return transcripts
 # .rename(columns = {'subsection_no': 'arc_no', 'subsection': 'arc_name'})
