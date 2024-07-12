@@ -75,4 +75,3 @@ def CollectTranscripts(transcript_df, data_dir, addl_columns = {}):
     transcripts.reset_index(inplace = True)
     transcripts.drop('index', axis = 1, inplace = True)
     return transcripts
-# .rename(columns = {'subsection_no': 'arc_no', 'subsection': 'arc_name'})
