@@ -14,3 +14,16 @@ cast = {
     'LIAM':     {'name': "Liam O'Brien",      'color': '#333333'}, #charcoal
     'ASHLEY':   {'name': 'Ashley Johnson',    'color': '#ffd700'}, #gold
 }
+
+# sections of the show that have role-playing
+rp_sections = ['Part I', 'Part II']
+
+# episodes to remove (not actual episodes)
+episodes_to_remove = [
+    {'campaign_no': 1, 'arc_no': 1, 'episode_no': 12}
+]
+
+# colors to use for arcs within campaigns (each sublist is a separate campaign)
+arc_colors = [
+    ['#bfb5b2', '#83b58e', '#5e3c58', '#ba9a74', '#2e4045']
+]
