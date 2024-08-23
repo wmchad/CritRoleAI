@@ -5,14 +5,14 @@ db_file  = 'transcript_database.csv'
 
 # info about the primary cast members
 cast = {
-    'MATT':     {'name': 'Matthew Mercer',    'color': '#9f6701'}, #brown
-    'LAURA':    {'name': 'Laura Bailey',      'color': '#209bc7'}, #cerulean blue
-    'SAM':      {'name': 'Sam Riegel',        'color': '#971287'}, #royal purple
-    'MARISHA':  {'name': 'Marisha Ray',       'color': '#228B22'}, #forest green
-    'TRAVIS':   {'name': 'Travis Willingham', 'color': '#bcbcbc'}, #grey
-    'TALIESIN': {'name': 'Taliesin Jaffe',    'color': '#2020a0'}, #navy blue
-    'LIAM':     {'name': "Liam O'Brien",      'color': '#333333'}, #charcoal
-    'ASHLEY':   {'name': 'Ashley Johnson',    'color': '#ffd700'}, #gold
+    'MATT':     {'name': 'Matthew Mercer',    'speakerno': 0, 'color': '#9f6701'}, #brown
+    'LAURA':    {'name': 'Laura Bailey',      'speakerno': 1, 'color': '#209bc7'}, #cerulean blue
+    'SAM':      {'name': 'Sam Riegel',        'speakerno': 2, 'color': '#971287'}, #royal purple
+    'MARISHA':  {'name': 'Marisha Ray',       'speakerno': 3, 'color': '#228B22'}, #forest green
+    'TRAVIS':   {'name': 'Travis Willingham', 'speakerno': 4, 'color': '#bcbcbc'}, #grey
+    'TALIESIN': {'name': 'Taliesin Jaffe',    'speakerno': 5, 'color': '#2020a0'}, #navy blue
+    'LIAM':     {'name': "Liam O'Brien",      'speakerno': 6, 'color': '#333333'}, #charcoal
+    'ASHLEY':   {'name': 'Ashley Johnson',    'speakerno': 7, 'color': '#ffd700'}, #gold
 }
 
 # sections of the show that have role-playing
